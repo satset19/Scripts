@@ -62,6 +62,21 @@ async function getContacts(
     ...(options || {}),
   });
 }
-async function deleteContact() {}
 
-module.exports = { addContact, getContacts };
+async function deleteContact(token, contactId) {
+  try {
+    const url = `${process.env.API_DB_URL}/api/v1/contact/${contactId}`;
+    const response = await axios({
+      method: "delete",
+      url,
+      headers: {
+        token,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+module.exports = { addContact, getContacts, deleteContact };

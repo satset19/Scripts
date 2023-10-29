@@ -1,5 +1,5 @@
 const xlsx = require("xlsx");
-const { addContact, getContacts } = require("./services/ContactController");
+const { addContact, getContacts, deleteContact } = require("./services/ContactController");
 
 const t = "dcdf26cef7248a1f200140e8329f8a242ce777f0e54246089b913d199605aad5b7";
 const s = "02SERVER";
@@ -49,6 +49,20 @@ const editContact = async (sender, token) => {
     console.log(data.data.contacts);
   } catch (error) {
     console.log(error);
+  }
+};
+
+const deleteContactById = async (token, contactId) => {
+  try {
+    // Call the deleteContact function
+    const result = await deleteContact(token, contactId);
+    if (result) {
+      console.log("Contact deleted successfully.");
+    } else {
+      console.log("Contact deletion failed.");
+    }
+  } catch (error) {
+    console.error("Error deleting contact:", error);
   }
 };
 
